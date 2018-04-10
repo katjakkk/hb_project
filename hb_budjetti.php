@@ -80,7 +80,7 @@ echo "<br>]";
 <!-- Chart code -->
 <script>
     
-var myData= [<?php $prefix = '';
+//var myData= [<?php/* $prefix = '';
 while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo $prefix . " { <br>";
   echo '  "date": "' . $row['bdate'] . '",' . "<br>";
@@ -90,10 +90,10 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
 }
 echo "<br>";
 
-?>
+*/?>
 
     ],
-</style>
+</script>
 
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -110,80 +110,21 @@ var chart = AmCharts.makeChart("chartdiv", {
     "marginRight":80,
     "autoMarginOffset":20,
     "dataDateFormat": "YYYY-MM-DD HH:NN",
-    "dataProvider": [{
-        "date": "2012-01-01",
-        "value": 8
-    }, {
-        "date": "2012-01-02",
-        "color":"#CC0000",
-        "value": 10
-    }, {
-        "date": "2012-01-03",
-        "value": 12
-    }, {
-        "date": "2012-01-04",
-        "value": 14
-    }, {
-        "date": "2012-01-05",
-        "value": 11
-    }, {
-        "date": "2012-01-06",
-        "value": 6
-    }, {
-        "date": "2012-01-07",
-        "value": 7
-    }, {
-        "date": "2012-01-08",
-        "value": 9
-    }, {
-        "date": "2012-01-09",
-        "value": 13
-    }, {
-        "date": "2012-01-10",
-        "value": 15
-    }, {
-        "date": "2012-01-11",
-        "color":"#CC0000",
-        "value": 19
-    }, {
-        "date": "2012-01-12",
-        "value": 21
-    }, {
-        "date": "2012-01-13",
-        "value": 22
-    }, {
-        "date": "2012-01-14",
-        "value": 20
-    }, {
-        "date": "2012-01-15",
-        "value": 18
-    }, {
-        "date": "2012-01-16",
-        "value": 14
-    }, {
-        "date": "2012-01-17",
-        "color":"#CC0000",
-        "value": 16
-    }, {
-        "date": "2012-01-18",
-        "value": 18
-    }, {
-        "date": "2012-01-19",
-        "value": 17
-    }, {
-        "date": "2012-01-25",
-        "value": 15
-    }, {
-        "date": "2012-01-21",
-        "value": 12
-    }, {
-        "date": "2012-01-22",
-        "color":"#CC0000",
-        "value": 10
-    }, {
-        "date": "2012-01-23",
-        "value": 8
-    }],
+    "dataProvider": [
+       
+      
+        <?php  $prefix = '';
+while ( $row = mysqli_fetch_assoc( $result ) ) {
+  echo $prefix . " { \n";
+  echo '  "date": "' . $row['bdate'] . '",';
+  echo '  "value": ' . $row['bought'] ;
+  echo " }";
+  $prefix = ",\n";
+}
+
+?>
+    
+    ],
     "valueAxes": [{
         "axisAlpha": 0,
         "guides": [{
@@ -203,7 +144,7 @@ var chart = AmCharts.makeChart("chartdiv", {
         "colorField":"color",
         "valueField": "value"
     }],
-    "trendLines": [{
+  /*  "trendLines": [{
         "finalDate": "2012-01-11 12",
         "finalValue": 19,
         "initialDate": "2012-01-02 12",
@@ -215,7 +156,7 @@ var chart = AmCharts.makeChart("chartdiv", {
         "initialDate": "2012-01-17 12",
         "initialValue": 16,
         "lineColor": "#CC0000"
-    }],
+    }],*/
     "chartScrollbar": {
         "scrollbarHeight":2,
         "offset":-1,
@@ -247,8 +188,9 @@ var chart = AmCharts.makeChart("chartdiv", {
 chart.addListener("dataUpdated", zoomChart);
 
 function zoomChart(){
-    chart.zoomToDates(new Date(2012, 0, 2), new Date(2012, 0, 13));
-}
+      //TODO inject php
+    //Select min date and select max date
+    chart.zoomToDates(new Date(2018, 0, 2), new Date(2018, 3, 13));
 </script>
 
 <!-- HTML -->
