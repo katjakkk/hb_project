@@ -23,10 +23,11 @@ if ( !$db ) {
 }*/
 
 // Fetch the data
+//TODO order by date!!!
 $query = "
   SELECT *
   FROM hb_chart
-  ORDER BY ch_id ASC";
+  ORDER BY bdate";
 $result = mysqli_query( $connection, $query );
 
 // All good?
@@ -50,13 +51,13 @@ if ( !$result ) {
 // Print out rows
 $prefix = '';
 echo "[ <br>";
-while ( $row = mysqli_fetch_assoc( $result ) ) {
+/*while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo $prefix . " { <br>";
   echo '  "date": "' . $row['bdate'] . '",' . "<br>";
   echo '  "value": ' . $row['bought'] .  "<br>";
   echo " }";
   $prefix = ", <br>";
-}
+}*/
 echo "<br>]";
 
 ?>
@@ -77,22 +78,14 @@ echo "<br>]";
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
+
+<h2>HERE!!!!!</h2>
+
+
 <!-- Chart code -->
 <script>
-    
-//var myData= [<?php/* $prefix = '';
-while ( $row = mysqli_fetch_assoc( $result ) ) {
-  echo $prefix . " { <br>";
-  echo '  "date": "' . $row['bdate'] . '",' . "<br>";
-  echo '  "value": ' . $row['bought'] .  "<br>";
-  echo " }";
-  $prefix = ", <br>";
-}
-echo "<br>";
+ // HERE!!!!!!   
 
-*/?>
-
-    ],
 </script>
 
 <!-- Resources -->
@@ -110,10 +103,10 @@ var chart = AmCharts.makeChart("chartdiv", {
     "marginRight":80,
     "autoMarginOffset":20,
     "dataDateFormat": "YYYY-MM-DD HH:NN",
-    "dataProvider": [
-       
-      
-        <?php  $prefix = '';
+    "dataProvider": [      
+        
+
+        <?php $prefix = '';
 while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo $prefix . " { \n";
   echo '  "date": "' . $row['bdate'] . '",';
@@ -144,7 +137,7 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
         "colorField":"color",
         "valueField": "value"
     }],
-  /*  "trendLines": [{
+   /* "trendLines": [{
         "finalDate": "2012-01-11 12",
         "finalValue": 19,
         "initialDate": "2012-01-02 12",
@@ -188,9 +181,10 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
 chart.addListener("dataUpdated", zoomChart);
 
 function zoomChart(){
-      //TODO inject php
+    //TODO inject php
     //Select min date and select max date
     chart.zoomToDates(new Date(2018, 0, 2), new Date(2018, 3, 13));
+}
 </script>
 
 <!-- HTML -->
