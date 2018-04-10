@@ -171,7 +171,7 @@ var chart = AmCharts.makeChart("chartdiv", {
         "date": "2012-01-19",
         "value": 17
     }, {
-        "date": "2012-01-20",
+        "date": "2012-01-25",
         "value": 15
     }, {
         "date": "2012-01-21",
