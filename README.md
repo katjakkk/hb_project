@@ -1,2 +1,2 @@
 # hb_project
-Henkilokohainen budjetointi
+Henkilokohtainen budjetointi
