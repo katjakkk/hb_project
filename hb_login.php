@@ -16,6 +16,17 @@
     </form>
     <pre>
     <?php
+$username = mysqli_real_escape_string($yourconnection,$_POST['username']); /* prevents a bit of SQL injection */
+
+/*$qry=mysqli_query($yourconnection,"SELECT * FROM admininfo WHERE username='$username' AND password='$password' AND status='customer'");
+
+if(mysqli_num_rows($qry)==1){
+header("LOCATION:CustomerPage.php");
+}
+
+else {
+echo "Error! No user found.";
+}*/
 //$_SESSION['username'] = $username;
 //header("location:redirectafterlogin.php"); 
     if($_POST["clicked"]) {
