@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="hb_style.css">
+
 <?php
 $page= "Budjetti";
 include_once 'hb_header.php';
@@ -50,15 +52,15 @@ if ( !$result ) {
 //mysqli_close($connection);
 // Print out rows
 $prefix = '';
-echo "[ <br>";
-/*while ( $row = mysqli_fetch_assoc( $result ) ) {
+/*echo "[ <br>";
+while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo $prefix . " { <br>";
   echo '  "date": "' . $row['bdate'] . '",' . "<br>";
   echo '  "value": ' . $row['bought'] .  "<br>";
   echo " }";
   $prefix = ", <br>";
-}*/
-echo "<br>]";
+}
+echo "<br>]";*/
 
 ?>
 
@@ -79,8 +81,29 @@ echo "<br>]";
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
 
-<h2>HERE!!!!!</h2>
-
+<!-- Budjet boxes -->
+<div class="container">
+	<main>
+	<div class="txt-box color1">
+		<h3>Myönnetty</h3>
+		<p>
+			$row['given']
+		</p>
+	</div>
+	<div class="txt-box color2">
+		<h3>Käytetty</h3>
+		<p>
+			$row['used']
+		</p>
+	</div>
+	<div class="txt-box color3">
+		<h3>Jäljellä</h3>
+		<p>
+			$row['remaining']
+		</p>
+	</div>
+	</main>
+</div>
 
 <!-- Chart code -->
 <script>
