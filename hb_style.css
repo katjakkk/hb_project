@@ -86,16 +86,15 @@ h1 {
 .color3 {
 	background-color: #FFDA45;
 }
-	
 .container {
-	max-width: 50%;
+	max-width: 38%;
 	margin: auto;
 	display: flex;
 	flex-wrap: wrap;
 }
 .txt-box {
 	display: block;
-	width: 100px;
+	width: 150px;
 	float: left;
 	text-align: center;
 	padding: .75em;
