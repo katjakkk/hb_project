@@ -76,6 +76,33 @@ h1 {
     font-size: 17px;
 }
 
+/* ----- Budjet related ----- */
+.color1 {
+	background-color: #54AD85;
+}
+.color2 {
+	background-color: #BA4C3F;
+}
+.color3 {
+	background-color: #FFDA45;
+}
+	
+.container {
+	max-width: 50%;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+.txt-box {
+	display: block;
+	width: 100px;
+	float: left;
+	text-align: center;
+	padding: .75em;
+	margin: 0px 20px;
+}
+
+
 @media screen and (min-width: 870px) { .quarter2{
     width:24.99999%;
     height:24.99999%;
