@@ -118,6 +118,7 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
 ?>
     
     ],
+     
     "valueAxes": [{
         "axisAlpha": 0,
         "guides": [{
@@ -137,19 +138,19 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
         "colorField":"color",
         "valueField": "value"
     }],
-   /* "trendLines": [{
-        "finalDate": "2012-01-11 12",
-        "finalValue": 19,
-        "initialDate": "2012-01-02 12",
-        "initialValue": 10,
+    "trendLines": [{
+        "finalDate": "2018-31-12",
+        "finalValue": 400,
+        "initialDate": "2018-01-02",
+        "initialValue": 400,
         "lineColor": "#CC0000"
-    }, {
+    }/* {
         "finalDate": "2012-01-22 12",
         "finalValue": 10,
         "initialDate": "2012-01-17 12",
         "initialValue": 16,
         "lineColor": "#CC0000"
-    }],*/
+    }*/],
     "chartScrollbar": {
         "scrollbarHeight":2,
         "offset":-1,
