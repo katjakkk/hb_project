@@ -80,30 +80,49 @@ echo "<br>]";*/
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
-
 <!-- Budjet boxes -->
-<div class="container">
+
+
+<!--<div class="container center">
 	<main>
 	<div class="txt-box color1">
 		<h3>Myönnetty</h3>
 		<p>
-			$row['given']
+			
 		</p>
 	</div>
 	<div class="txt-box color2">
 		<h3>Käytetty</h3>
 		<p>
-			$row['used']
+			
 		</p>
 	</div>
 	<div class="txt-box color3">
 		<h3>Jäljellä</h3>
 		<p>
-			$row['remaining']
+			
 		</p>
 	</div>
 	</main>
-</div>
+</div>-->
+
+<h2 class="center">Budjetin käyttö</h2>
+
+<pre>
+
+</pre>
+
+<p class="atleft">
+	Skaalaa taaksepäin
+</p>
+
+
+
+<p class="atright">
+	Skaalaa eteenpäin
+</p>
+
+
 
 <!-- Chart code -->
 <script>
@@ -126,6 +145,11 @@ var chart = AmCharts.makeChart("chartdiv", {
     "marginRight":80,
     "autoMarginOffset":20,
     "dataDateFormat": "YYYY-MM-DD HH:NN",
+    "colors": [
+		"#ac1900",
+		"#e65100",
+		"#ffbb93"
+    ],
     "dataProvider": [      
         
 
@@ -157,29 +181,34 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
     "graphs": [{
         "balloonText": "[[category]]<br><b><span style='font-size:14px;'>value:[[value]]</span></b>",
         "bullet": "round",
-        "dashLength": 3,
+        "bulletSize": 9,
+        "dashLength": 6,
         "colorField":"color",
+	"lineThickness": 3,
+	"minBulletSize": 2,
+	"title": "graph",
         "valueField": "value"
     }],
     "trendLines": [{
         "finalDate": "2018-31-12",
         "finalValue": 400,
         "initialDate": "2018-01-02",
-        "initialValue": 400,
-        "lineColor": "#CC0000"
+        "initialValue": 400,    
+	"lineThickness": 3,
+        "lineColor": "#ff8a65"
     }/* {
         "finalDate": "2012-01-22 12",
         "finalValue": 10,
         "initialDate": "2012-01-17 12",
         "initialValue": 16,
-        "lineColor": "#CC0000"
+        "lineColor": "#ff8a65"
     }*/],
     "chartScrollbar": {
-        "scrollbarHeight":2,
+        "scrollbarHeight":3,
         "offset":-1,
         "backgroundAlpha":0.1,
         "backgroundColor":"#888888",
-        "selectedBackgroundColor":"#67b7dc",
+        "selectedBackgroundColor":"#bbbbbb",
         "selectedBackgroundAlpha":1
     },
     "chartCursor": {
@@ -213,7 +242,11 @@ function zoomChart(){
 
 <!-- HTML -->
 <div id="chartdiv"></div>				
-    
+
+<pre>
+
+</pre>
+
 <?php
 include_once 'hb_footer.inc';
 
