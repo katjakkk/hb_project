@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="hb_style.css">
+<link rel="stylesheet" href="css/hb_style.css">
+<title>Budjetti</title>
 
 <?php
 $page= "Budjetti";
@@ -24,8 +25,7 @@ if ( !$db ) {
   die ( 'Error selecting database ' . test . ' : ' . mysqli_error() );
 }*/
 
-// Fetch the data
-//TODO order by date!!!
+// Fetch the data from hb_chart and order by date
 $query = "
   SELECT *
   FROM hb_chart
@@ -41,9 +41,6 @@ if ( !$result ) {
 }
 
 // Print out rows
-
-
-
 /*while ( $row = mysqli_fetch_assoc( $result ) ) {
  echo $row['bought'] . ' | ' . $row['bdate'] . "<br>";
 }*/
@@ -64,15 +61,6 @@ echo "<br>]";*/
 
 ?>
 
-
-<!-- Styles -->
-<style>
-#chartdiv {
-  width: 100%;
-  height: 500px;
-}																
-</style>
-
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -80,55 +68,44 @@ echo "<br>]";*/
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
+
+<h2 class="center">Budjetin käyttö</h2>
+<br>
+
 <!-- Budjet boxes -->
 
-
-<!--<div class="container center">
+<div class="container center">
 	<main>
-	<div class="txt-box color1">
+	<div class="txt-box color1 budgetfont">
 		<h3>Myönnetty</h3>
 		<p>
-			
+			3000<!-- This has to be edited to come from the database -->
 		</p>
 	</div>
-	<div class="txt-box color2">
+	<div class="txt-box color2 budgetfont">
 		<h3>Käytetty</h3>
 		<p>
-			
+			187<!-- And this -->
 		</p>
 	</div>
-	<div class="txt-box color3">
+	<div class="txt-box color3 budgetfont">
 		<h3>Jäljellä</h3>
 		<p>
-			
+			2813<!-- And this -->
 		</p>
 	</div>
 	</main>
-</div>-->
-
-<h2 class="center">Budjetin käyttö</h2>
-
-<pre>
-
-</pre>
-
+</div>
+<br>
+<br>
+<!-- Chart info -->
 <p class="atleft">
-	Skaalaa taaksepäin
-</p>
-
-
-
-<p class="atright">
 	Skaalaa eteenpäin
 </p>
 
-
-
-<!-- Chart code -->
-<script>
- // HERE!!!!!!   
-
-</script>
+<p class="atright">
+	Skaalaa taaksepäin
+</p>
 
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -179,7 +156,7 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
         "tickLength": 0
     }],
     "graphs": [{
-        "balloonText": "[[category]]<br><b><span style='font-size:14px;'>value:[[value]]</span></b>",
+        "balloonText": "[[category]]<br><b><span style='font-size:14px;'>Käytetty: [[value]]</span></b>",
         "bullet": "round",
         "bulletSize": 9,
         "dashLength": 6,
@@ -191,9 +168,9 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
     }],
     "trendLines": [{
         "finalDate": "2018-31-12",
-        "finalValue": 400,
-        "initialDate": "2018-01-02",
-        "initialValue": 400,    
+        "finalValue": 120,
+        "initialDate": "2018-01-01",
+        "initialValue": 25,    
 	"lineThickness": 3,
         "lineColor": "#ff8a65"
     }/* {
@@ -240,13 +217,22 @@ function zoomChart(){
 }
 </script>
 
-<!-- HTML -->
+<!-- Chart HTML command -->
 <div id="chartdiv"></div>				
 
-<pre>
+pre>
 
 </pre>
 
+<!-- More chart info -->
+<div class="center">
+	<img src="chartinfo.jpg" title="Kaavio info" alt="Kaavio info" width="291" height="28">
+</div>
+
+<pre>
+
+
+</pre>
 <?php
 include_once 'hb_footer.inc';
 
