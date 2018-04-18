@@ -5,6 +5,10 @@
     color: black;
         }
 
+footer {
+    background-color: #bbbbbb;
+}
+
 form {
    background-color: bisque;
      filter: 10%;
@@ -76,6 +80,10 @@ h1 {
     font-size: 17px;
 }
 
+a img {
+	margin: 1em;
+}
+
 /* ----- Budjet related ----- */
 .color1 {
 	background-color: #54AD85;
@@ -87,20 +95,17 @@ h1 {
 	background-color: #FFDA45;
 }
 .container {
-	max-width: 100%;
-	margin: auto;
-	display: flex;
-	flex-wrap: wrap;
 	margin-bottom: 100px;
-	float: center;
 }
 .txt-box {
-	display: block;
 	width: 150px;
 	float: left;
 	text-align: center;
-	padding: .75em;
-	margin: 0px 20px;
+	padding: .55em;
+	margin: 0px 10px;
+}
+.centered {
+	float: center;
 }
 
 
@@ -112,7 +117,7 @@ h1 {
 }
 .atright {
 	float: right;
-	margin-right: 40px;
+	margin-right: 80px;
 }
 .atcenter{
 	float: center;
