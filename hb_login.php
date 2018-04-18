@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title> HB LOGIN </title>
     
-    <link rel="stylesheet" href="hb_style.css">
+    <link rel="stylesheet" href="css/hb_style.css">
 </head>
 <body>
     
@@ -13,7 +13,7 @@
      <img src="http://henkilokohtainenbudjetointi.fi/wp-content/uploads/2017/01/logokuva_oranssi_levea.jpg" alt="HB Logo" width="100%" height="100%">
 
      <?php
-     $config = parse_ini_file('../../config.ini');
+     $config = parse_ini_file('../valmisledi/config.ini');
      $connection = mysqli_connect($config['dbaddr'],$config['usernamecd'],$config['password'],$config['dbname']);
 
      //jos menee pieleen, virheilmoitus
