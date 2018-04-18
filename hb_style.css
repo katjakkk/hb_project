@@ -123,14 +123,16 @@ a img {
 	background-color: #54AD85;
 }
 .color2 {
-	background-color: #BA4C3F;
+	background-color: #F26554;
 }
 .color3 {
 	background-color: #FFDA45;
 }
 .container {
+	width: 100%;
 	margin-bottom: 100px;
-	margin-left: 35%;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 .txt-box {
 	width: 150px;
@@ -139,13 +141,13 @@ a img {
 	padding: .55em;
 	margin: 0px 10px;
 }
-.centered {
-	float: center;
+
+/* ------ Budjet chart ------ */
+
+#chartdiv {
+  width: 100%;
+  height: 500px;
 }
-
-
-/* ------ Budjet chart info ------ */
-
 .atleft {
 	float: left;
 	margin-left: 40px;
@@ -153,16 +155,6 @@ a img {
 .atright {
 	float: right;
 	margin-right: 80px;
-}
-.atcenter{
-	float: center;
-}
-.boxed {
-	display: block;
-	width: 150px;
-	float: right;
-	padding: .75em;
-	margin: 0px 20px;
 }
 
 
