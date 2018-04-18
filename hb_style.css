@@ -5,6 +5,49 @@
     color: black;
         }
 
+/* ------- LOGIN RELATED ------ */
+#mikko2 form {
+   background-color: #99aab9;
+     filter: 10%;
+    border: 2px orange;
+    padding-top : 30px;
+    padding-bottom: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+#mikko1 input[type=submit] {
+    background-color: #f7f4f44d;
+    color: black;
+    padding: 6px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#mikko input[type=submit]:hover {
+    background-color: #fa9e39;
+}
+
+h1 {
+    text-align: center;
+    background-color: #fc9f28;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fefeff;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
+
+#error{
+    width: 100%;
+    color:red;
+    text-align: center;
+}
+
+/* --------- /LOGIN RELATED -------- */
+
+
 footer {
     background-color: #bbbbbb;
 }
@@ -22,15 +65,6 @@ form {
 .center {
     text-align: center;
     
-}
-
-h1 {
-    text-align: center;
-    border: 2xp solid green;
-    background-color: darkorange;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    color: whitesmoke;
 }
 
 #jj {
