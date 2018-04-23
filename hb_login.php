@@ -34,7 +34,7 @@
      }
      ?>
 
-   <form id="mikko2" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+   <form id="mikko2" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>" align="center">
        <h2>Kirjaudu sisään</h2>
     Asiakaskoodi: <input id="mikko1" type="password" name="username">
        <br><br>
