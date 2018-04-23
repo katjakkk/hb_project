@@ -6,10 +6,8 @@ $page= "Budjetti";
 include_once 'hb_header.php';
 // Load configuration as an array. Use the actual location of your configuration file
 $config = parse_ini_file('../valmisledi/config.ini'); 
-
 // Try and connect to the database
 $connection = mysqli_connect($config['dbbaddr'],$config['usernamecd'],$config['password'],$config['dbname']);
-
 // If connection was not successful, handle the error
 if($connection === false) {
     // Handle error - notify administrator, log to a file, show an error screen, etc.
@@ -18,20 +16,17 @@ if($connection === false) {
 }else{
 mysqli_set_charset($connection, "utf8");
 }
-
 /*Select the data base
 $db = mysqli_select_db( 'test', $connection );
 if ( !$db ) {
   die ( 'Error selecting database ' . test . ' : ' . mysqli_error() );
 }*/
-
 // Fetch the data from hb_chart and order by date
 $query = "
   SELECT *
   FROM hb_chart
   ORDER BY bdate";
 $result = mysqli_query( $connection, $query );
-
 // All good?
 if ( !$result ) {
   // Nope
@@ -39,12 +34,10 @@ if ( !$result ) {
   $message .= 'Whole query: ' . $query;
   die( $message );
 }
-
 // Print out rows
 /*while ( $row = mysqli_fetch_assoc( $result ) ) {
  echo $row['bought'] . ' | ' . $row['bdate'] . "<br>";
 }*/
-
 // Close the connection
 //mysqli_close($connection);
 // Print out rows
@@ -58,7 +51,6 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
   $prefix = ", <br>";
 }
 echo "<br>]";*/
-
 ?>
 
 <!-- Resources -->
@@ -77,21 +69,21 @@ echo "<br>]";*/
 <div class="container center">
 	<main>
 	<div class="txt-box color1 budgetfont">
-		<h3>Myönnetty</h3>
+		<h4>Myönnetty</h4>
 		<p>
-			3000<!-- This has to be edited to come from the database -->
+			3000€<!-- This has to be edited to come from the database -->
 		</p>
 	</div>
 	<div class="txt-box color2 budgetfont">
-		<h3>Käytetty</h3>
+		<h4>Käytetty</h4>
 		<p>
-			187<!-- And this -->
+			187€<!-- And this -->
 		</p>
 	</div>
-	<div class="txt-box color3 budgetfont">
-		<h3>Jäljellä</h3>
+	<div class="txt-boxj color3 budgetfont">
+		<h4>Jäljellä</h4>
 		<p>
-			2813<!-- And this -->
+			2813€<!-- And this -->
 		</p>
 	</div>
 	</main>
@@ -129,7 +121,6 @@ var chart = AmCharts.makeChart("chartdiv", {
     ],
     "dataProvider": [      
         
-
         <?php $prefix = '';
 while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo $prefix . " { \n";
@@ -138,7 +129,6 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
   echo " }";
   $prefix = ",\n";
 }
-
 ?>
     
     ],
@@ -207,9 +197,7 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
         "enabled": true
      }
 });
-
 chart.addListener("dataUpdated", zoomChart);
-
 function zoomChart(){
     //TODO inject php
     //Select min date and select max date
@@ -220,21 +208,30 @@ function zoomChart(){
 <!-- Chart HTML command -->
 <div id="chartdiv"></div>				
 
-pre>
+<pre>
 
 </pre>
 
 <!-- More chart info -->
-<div class="center">
-	<img src="chartinfo.jpg" title="Kaavio info" alt="Kaavio info" width="291" height="28">
+<div class="center"><pre>
+
+
+
+
+
+</pre>
+	<img src="img/chartinfo.jpg" title="Kaavio info" alt="Kaavio info" width="291" height="28">
 </div>
 
 <pre>
 
 
 </pre>
+<br><br>
 <?php
+
 include_once 'hb_footer.inc';
+  
 
 
   
