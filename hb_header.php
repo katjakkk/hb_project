@@ -24,6 +24,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
         <a href="hb_palvelut.php" <?php echo ($page == "Palvelut") ? 'class="active"' : ''; ?>onclick="w3_close()" class="w3-bar-item w3-button">Palvelut</a>
         <a href="hb_budjetti.php" <?php echo ($page == "Budjetti") ? 'class="active"' : ''; ?> onclick="w3_close()" class="w3-bar-item w3-button">Budjetti</a>
         <a href="hb_historia.php" <?php echo ($page == "Historia") ? 'class="active"' : ''; ?>  onclick="w3_close()" class="w3-bar-item w3-button">Historia</a>
+	<title><?php echo $page; ?></title>
     </nav>
 
 <!-- Top menu -->
