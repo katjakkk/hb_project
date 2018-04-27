@@ -23,8 +23,8 @@ if ( !$db ) {
 }*/
 // Fetch the data from hb_chart and order by date
 $query = "
-  SELECT *
-  FROM hb_chart
+  SELECT bought, bdate
+  FROM hb_uses WHERE usercode=123456
   ORDER BY bdate";
 $result = mysqli_query( $connection, $query );
 // All good?
@@ -201,7 +201,7 @@ chart.addListener("dataUpdated", zoomChart);
 function zoomChart(){
     //TODO inject php
     //Select min date and select max date
-    chart.zoomToDates(new Date(2018, 0, 2), new Date(2018, 3, 13));
+    chart.zoomToDates(new Date(2018, 0, 23), new Date(2018, 11, 27));
 }
 </script>
 
