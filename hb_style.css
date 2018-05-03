@@ -257,6 +257,13 @@ h3{
 	padding: .55em;
 	margin: 10px 10px;
 }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
 /* ------ Budjet chart ------ */
 
 #chartdiv {
