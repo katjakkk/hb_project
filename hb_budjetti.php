@@ -66,7 +66,7 @@ echo "<br>]";*/
 
 <!-- Budjet boxes -->
 
-<div class="container center">
+<div class="flex-container center">
 	<main>
 	<div class="txt-box color1 budgetfont">
 		<h4>Myönnetty</h4>
