@@ -48,12 +48,7 @@ mysqli_set_charset($connection, "utf8");
             <?php
 
                } 
-               
-              if(empty($_POST['Bdate'])){
-                   echo "<p class='alert'>Valitse palvelun käyttöpäivä!</p>";
-               }if(empty($_POST['duration'])){
-                   echo "<p class='alert'>Valitse palvelun kesto.</p>";
-               }
+              
                
                if($_POST['Bdate'] && $_POST['duration'] ){
                    $usercode =$_POST['usercode'];
