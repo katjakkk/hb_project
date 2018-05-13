@@ -234,7 +234,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
               //btn.setAttribute("disabled", "disabled");
             });
         } else {
-            txt<?=$kk?>.innerHTML = '<span style="color: red; font-weight: bold">Please enter date and duration</span>';
+            txt<?=$kk?>.innerHTML = '<span style="color: red; font-weight: bold">Syötä käyttöpäivä ja kesto</span>';
         }
         
         
