@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(empty($_SESSION['usercode'])){
+     header("LOCATION:hb_login.php");
+}
 $page= "Historia";
 include_once 'hb_header.php';
 $config = parse_ini_file('../valmisledi/config.ini'); 
@@ -13,11 +16,13 @@ if($connection === false) {
     echo "Connection to database failed :( ";
     exit ("If we have no database connection, this is end");
 }else {
+    $usercode = $_SESSION['usercode'];
     mysqli_set_charset($connection, "utf8");
-    $fetch= mysqli_query($connection,"SELECT * FROM hb_uses WHERE usercode=123456");
+    $fetch= mysqli_query($connection,"SELECT * FROM hb_uses WHERE usercode= '$usercode'");
     //$fetch = mysqli_fetch_array($result);
    
 }
+echo "<p class='center' style='color:orange; font-size:28px; margin-top:0px;'> Ostetut Palvelut</p>";
 $num=0;
  while ($row = mysqli_fetch_assoc($fetch)){
      $kk = $row['p_id'];
@@ -29,34 +34,107 @@ $num=0;
      $ss= $row1['s_id'];
     $fetch3 = mysqli_query($connection, "SELECT * FROM hb_service WHERE s_id = '$ss'");
      $row3 = mysqli_fetch_assoc($fetch3);
-    echo "<div class='mm quarter2 kborder' style='background-color:white;'>";
-     echo "Palvelu: " . $row3['s_name'] . "<br>Yritys: " . $row2['c_name'] . "<br>Kesto: " . $row['duration'] . "h<br>Käyttö pv: " . date('d.m.Y', strtotime($row['dateofuse'])); ;
+    echo "<div class='quarter4 kborder' style='background-color:white;margin-right: 10px; margin-top: 10px;'>";
+     echo "<div>Palvelu: <p id='history' class='box2'>" . $row3['s_name'] . "</p></div><br><div class='hstripes' style='background-color:#fcf4eb;'>Yritys: <p id='history' class='box2'>" . $row2['c_name'] . "</p></div><br><div class='hstripes'>Kesto: <p id='history' class='box2'>" . $row['duration'] . "h</p></div><br><div class='hstripes' class='box2' style='background-color:#fcf4eb;'>Käyttöpäivä: <p id='history' class='box2'>" . date('d.m.Y', strtotime($row['dateofuse'])) . "</p></div>"; ;
      echo "<br>";
-     echo "<p>Ostopv: " . date('d.m.Y', strtotime($row['bdate'])) . "</p>";
-     echo "<p>Maksettu: " . $row['bought'] . "€</p>";
+     echo "<div class='hstripes'>Ostopäivä: <p id='history' class='box2'>" . date('d.m.Y', strtotime($row['bdate'])) . "</p></div>";
+     echo "<div class='hstripes' style='background-color:#fcf4eb; margin-top:0px;'>Maksettu: <p id='history' class='box2'>" . $row['bought'] . "€</p></div>";
      echo "<form  method='post' action= '" . $_SERVER["PHP_SELF"] . "'>";
-     echo "<button id='myBtnp$num name='arvioi'>Arvioi</button>";
-     
+     echo "<button id='myBtnp$num' class='abutton' name='arvioi' data-modal=
+                 'myModalp$num'>Arvioi</button>";
+     echo "<input type='hidden' name='modalOpen2' value='myModalp$num'>";
      echo "</form></div>";
      
+      
      ?>
 
-    <div id="myModalp<?php echo $num;?>" class="modalp" data-modal=
+   <div id="myModalp<?php echo $num;?>" style="display:none;" class="modalp" data-modal=
                  "myModalp<?php echo $num;?>">
             <div class="modal-contentp">
             <span class="closep" data-modal=
                  "myModalp<?php echo $num;?>">&times;</span>
-                <form id="modalFormp" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                   <p>Tähtien määrä (1-5): </p> <br><input type="number" min="1" max="5" name="stars"><br>
-                    <p>Vapaa arviointi: </p><br><input type="text" maxlength="500" name="freetext">
-                    <input id="button" type="submit" name="save" class= "btn btn-primary" value="Tallenna"><br><br>
+            <form id="modalFormp" method="post" action="<?php echo htmlentities($_SERVER["PHP_SELF"]); ?>">
+                   <p>Tähtien määrä: </p>
+                <div class="rating">
+              <?php  
+     
+            if($row['stars'] == NULL){
+                ///////// tähdet ///////////////////
+            if($row['stars']>=1){
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=1><span class='fa fa-star checked'></span></label>";
+            } else {
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=1><span class='fa fa-star'></span></label>";
+            }
+     
+            if($row['stars']>=2){
+                  "<label class='starcontainer'><input type='radio' name='rating' value=2><span class='fa fa-star checked'></span></label>";
+            } else {
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=2><span class='fa fa-star'></span></label>";
+            }
+            if($row['stars']>=3){
+                  "<label class='starcontainer'><input type='radio' name='rating' value=3><span class='fa fa-star checked'></span></label>";
+            } else {
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=3><span class='fa fa-star'></span></label>";
+            }
+            if($row['stars']>=4){
+                  "<label class='starcontainer'><input type='radio' name='rating' value=4><span class='fa fa-star checked'></span></label>";
+            } else {
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=4><span class='fa fa-star'></span></label>";
+            }
+            if($row['stars']>=5){
+                  "<label class='starcontainer'><input type='radio' name='rating' value=5><span class='fa fa-star checked'></span></label>";
+            } else {
+                echo "<label class='starcontainer'><input type='radio' name='rating' value=5><span class='fa fa-star'></span></label>";
+            }
+            ///////////////////////////////////////////////////////
+            }if($row['stars'] != NULL) {
+                
+                if($row['stars']==1){
+                echo "<p class='gold' style='font-size:35px;'>&#9733;</p>";
+            }if($row['stars']==2){
+                 echo "<p class='gold' style='font-size:35px;'>&#9733;&#9733;</p>";
+            }if($row['stars']==3){
+                 echo "<p class='gold' style='font-size:35px;'>&#9733&#9733;&#9733;</p>";
+            }if($row['stars']==4){
+                 echo "<p class='gold' style='font-size:35px;'>&#9733;&#9733;&#9733;&#9733;</p>";
+            }if($row['stars']==5){
+                 echo "<p class='gold' style='font-size:35px;'>&#9733;&#9733;&#9733;&#9733;&#9733;</p>";
+            }
+                
+            }else {
+                
+            }
+                ?>
+                </div>
+                
+                
+                <p>Vapaa arviointi: </p>
+                <?php
+                    if($row['freetext'] == NULL){
+                ?>
+                <textarea name="freetext" cols="40" rows="5" maxlength="500" style="width:96%;"></textarea>
+                <input id="button" type="submit" name="save" class= "btn btn-primary" value="Tallenna"><br><br>
                 <input type="hidden" name="1" value="check">
                 <input type="hidden" name="clicked" value="whatevs">
                 <input type="hidden" name="selected_service" value="<?=$kk?>">
                 <input type="hidden" name="modalOpen2" value="myModalp<?php echo $num;?>">
-                </form>
+            </form>
  
 <?php
+     
+            }else {
+                echo "<p>" . $row['freetext'] . "</p>";
+            }
+     
+     if(!empty($_POST['modalOpen2'])){
+                   //suorita scripti
+                 ?>
+                <script>
+                    document.getElementById('<?php echo $_POST['modalOpen2'];?>').style.display = 'block';
+                </script>
+            <?php
+
+               } 
      
      
      if(!empty($_POST['save']) && $_POST["selected_service"] == $kk){
@@ -69,39 +147,94 @@ $num=0;
                 </script>
             <?php
               }
-         if(calcdate($row['dateofuse'])==false){
-             echo "Et voi vielä arvioida palvelua.";
-         }
+         $date1= date_create(date('Y-m-d'));
+         $date2= date_create($row['dateofuse']);
+         
+       if($date1 < $date2){
+           echo "<p id= 'alert'>Palvelu pitää olla käytetty ennen palvelun arviointia.</p>";
+       }  
+         $usid = $row['us_id'];
+        if($_POST['rating'] && $date1 >= $date2){
+            $stars = $_POST['rating'];
+            if($row['stars'] == NULL){
+            $sql = "UPDATE hb_uses SET stars= ". $_POST['rating'] . " WHERE us_id='$usid'";
+            $insert= mysqli_query($connection,$sql);
+             $sql2 = "UPDATE hb_provide SET rate = rate + '$stars', alkm = alkm +1 WHERE p_id = '$kk'";
+            $insert2= mysqli_query($connection,$sql2);
+
+            }    
+                
+            if($insert == true){
+                echo "<p id='green'>Arviointi tallentui!</p>";
+            }else {
+                echo "Virhe";
+            }
+                
+            }
+         /*--------- NOT WORKING ----------------------------
+         
+         if($_POST['freetext']){
+                echo $_POST['freetext'];
+                $sql3 = "UPDATE hb_uses SET freetext= ". $_POST['freetext'] . " WHERE us_id='$usid'";
+                $insert3= mysqli_query($connection,$sql3);
+                
+                if($insert3 == true){
+                echo "<p id='green'>Arviointi tallentui!</p>";
+                }else {
+                echo "Virhe";
+                }
+        }*/ 
+           
+           
+       if($row['stars'] != NULL){
+           echo "<p id='green'>Olet jo arvioinut</p>";
+       }
+     }
      $num++;
- }
+     echo "</div></div>";
  }
      
-   function calcdate($date) {
-        $from = date('Y', strtotime($date));
-        $to   = date('Y');
-       if($to-$from <=0){
-            $from = date('m', strtotime($date));
-            $to   = date('m');
-           if($to-$from<=0){
-            $from = date('d', strtotime($date));
-            $to   = date('d');
-               if(to-from<=0){
-                   return true;
-               }else {
-                   return false;
-               }
-       }else {
-               return false;
-           }
-       }else{
-           return false;
-       }
-   }  
+   
 ?>
+       
+     
+
 
 
 <main>
-    <script>
+    <script>      
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    console.log( "ready!" );
+    
+    $('.starcontainer').hover(
+            // Handles the mouseover
+            function() {
+                $(this).find('span').addClass('checked');
+                $(this).prevAll().children('span').addClass('checked');
+               // $(this).nextAll().removeClass('checked'); 
+            },
+            // Handles the mouseout
+            function() {
+                $(this).find('span').removeClass('checked');
+                $(this).nextAll().children('span').removeClass('checked'); 
+                 $(this).prevAll().children('span').removeClass('checked'); 
+                
+            }
+        );
+
+    $('.starcontainer').click(function() {
+        
+        $(this).addClass('selected');
+        $(this).prevAll().addClass('selected');
+        
+        $(this).nextAll().removeClass('selected'); 
+    });
+    
+});
+
+        
+        
    
 var buttonmatches = document.querySelectorAll("button[id*='myBtnp']");
 var modalmatches = document.querySelectorAll("div[id*='myModalp']");
@@ -114,28 +247,29 @@ addlisteners();
 
 function addlisteners() {
 	
-var montako = modalmatches.length;
+var montako = spanmatches.length;
 
 console.log(montako);
 
 
 for (var i = 0; i < buttonmatches.length; i++) {
 		
-		console.log('sisällä ollaan');
+		//console.log('sisällä ollaan');
 		
-        buttonmatches[i].addEventListener("click", function () {
+        buttonmatches[i].addEventListener("click", function (e) {
         			
             // to open the correct modal
-            // select the div that directly follows the buttonmatch div
-            
-            	var selector = "button[id='" + this.id  + "']" + " + button";
-            console.log('I will query and open the next modal with this data:');
-            console.log(selector);
+            	var buttoni = e.target;		
+				var kohde = buttoni.dataset.modal;
+				console.log('in the close click'); 
+				console.log(kohde);           
+            // to close the correct modal
+            var selector = "div[id='" + kohde  + "']";
+           
             document.querySelector(selector).style.display = "block";
             
-            // OR SINCE WE should have the same amount of matches is each array
-            // but this can be error prone..
-            //modalmatches[i].style.display = "block";
+            
+
         });
         
         spanmatches[i].addEventListener("click", function (e) {
@@ -177,5 +311,4 @@ window.onclick = function(event) {
     </pre>
 </main>
 <?php
-//include_once 'hb_footer.inc';
-?>
+include_once 'hb_footer.inc';
