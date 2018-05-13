@@ -1,9 +1,13 @@
-<link rel="stylesheet" href="css/hb_style.css">
-<title>Budjetti</title>
 
 <?php
+session_start();
+if(empty($_SESSION['usercode'])){
+     header("LOCATION:hb_login.php");
+}
 $page= "Budjetti";
 include_once 'hb_header.php';
+
+
 // Load configuration as an array. Use the actual location of your configuration file
 $config = parse_ini_file('../valmisledi/config.ini'); 
 // Try and connect to the database
@@ -22,11 +26,14 @@ if ( !$db ) {
   die ( 'Error selecting database ' . test . ' : ' . mysqli_error() );
 }*/
 // Fetch the data from hb_chart and order by date
+$usercode = $_SESSION['usercode'];
+
 $query = "
   SELECT bought, bdate
-  FROM hb_uses WHERE usercode=123456
+  FROM hb_uses WHERE usercode= '$usercode'
   ORDER BY bdate";
 $result = mysqli_query( $connection, $query );
+
 // All good?
 if ( !$result ) {
   // Nope
@@ -34,6 +41,14 @@ if ( !$result ) {
   $message .= 'Whole query: ' . $query;
   die( $message );
 }
+
+$query2 = "
+  SELECT *
+  FROM hb_budjet WHERE usercode= '$usercode'";
+$result2 = mysqli_query($connection, $query2);
+
+
+
 // Print out rows
 /*while ( $row = mysqli_fetch_assoc( $result ) ) {
  echo $row['bought'] . ' | ' . $row['bdate'] . "<br>";
@@ -61,43 +76,43 @@ echo "<br>]";*/
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 
 
-<h2 class="center">Budjetin käyttö</h2>
+<h2 class="center" style="color:orange;">Budjetin käyttö</h2>
 <br>
 
 <!-- Budjet boxes -->
 
 <div class="flex-container center">
 	<main>
-	<div class="txt-box color1 budgetfont">
-		<h4>Myönnetty</h4>
-		<p>
-			3000€<!-- This has to be edited to come from the database -->
-		</p>
-	</div>
-	<div class="txt-box color2 budgetfont">
-		<h4>Käytetty</h4>
-		<p>
-			187€<!-- And this -->
-		</p>
-	</div>
-	<div class="txt-boxj color3 budgetfont">
-		<h4>Jäljellä</h4>
-		<p>
-			2813€<!-- And this -->
-		</p>
-	</div>
+	<div class="txt-box color1 budgetfont" style="margin-right: -40px;">
+        <?php 
+        while ( $row2 = mysqli_fetch_assoc( $result2 ) ) {
+		echo"<h4>Myönnetty</h4>";
+		echo"<p> " . $row2['given'] ."€
+		</p>";
+	echo"</div>";
+	echo "<div class='txt-box color2 budgetfont' style='float:right; margin-right:-10px;'>";
+		echo "<h4>Käytetty</h4>";
+		echo "<p>" . $row2['used'] . "€</p>";
+	echo "</div>";
+	echo "<div class='txt-boxj color3 budgetfont'>";
+		echo "<h4>Jäljellä</h4>";
+		echo "<p>" . $row2['remaining'] . "€
+		</p>";
+        }
+        ?>
+	   </div>
 	</main>
 </div>
 <br>
 <br>
-<!-- Chart info -->
+<!-- Chart info --
 <p class="atleft">
 	Skaalaa eteenpäin
 </p>
 
 <p class="atright">
 	Skaalaa taaksepäin
-</p>
+</p>-->
 
 <!-- Resources -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -158,9 +173,9 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
     }],
     "trendLines": [{
         "finalDate": "2018-31-12",
-        "finalValue": 120,
+        "finalValue": 300,
         "initialDate": "2018-01-01",
-        "initialValue": 25,    
+        "initialValue": 300,    
 	"lineThickness": 3,
         "lineColor": "#ff8a65"
     }/* {
@@ -231,6 +246,7 @@ function zoomChart(){
 <?php
 
 include_once 'hb_footer.inc';
+  
   
 
 
